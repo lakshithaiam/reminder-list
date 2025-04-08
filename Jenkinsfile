@@ -44,22 +44,23 @@ spec:
 '''
         }
     }
-    stages {
-    stage('SonarQube Analysis') {
-        steps {
-            container('sonar-scanner') {
-                script {
-                    // Run the SonarQube analysis using dotnet-sonarscanner
-                    sh '''
-                        dotnet sonarscanner begin /k:"reminder-list-dot-net" \
-                            /d:sonar.host.url="http://my-sonarqube-sonarqube.school-ns.svc.cluster.local:9000" \
-                            /d:sonar.token="sqp_1958971049a7e0c492e5f418668bb558c4d8273d" \
-                            /d:sonar.sources=.
-                        
-                        dotnet build
-                        
-                        dotnet sonarscanner end /d:sonar.token="sqp_1958971049a7e0c492e5f418668bb558c4d8273d"
-                    '''
+        stages {
+        stage('SonarQube Analysis') {
+            steps {
+                container('sonar-scanner') {
+                    script {
+                        // Run the SonarQube analysis using dotnet-sonarscanner
+                        sh '''
+                            dotnet sonarscanner begin /k:"reminder-list-dot-net" \
+                                /d:sonar.host.url="http://my-sonarqube-sonarqube.school-ns.svc.cluster.local:9000" \
+                                /d:sonar.token="sqp_1958971049a7e0c492e5f418668bb558c4d8273d" \
+                                /d:sonar.sources=.
+                            
+                            dotnet build
+                            
+                            dotnet sonarscanner end /d:sonar.token="sqp_1958971049a7e0c492e5f418668bb558c4d8273d"
+                        '''
+                    }
                 }
             }
         }
